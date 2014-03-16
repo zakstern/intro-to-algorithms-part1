@@ -61,9 +61,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private class RandomArrayIterator implements Iterator<Item> {
         private int i;
+        private int[] indexArray;
         
         public RandomArrayIterator() {
             i = N;
+            indexArray = new int[i];
+            for (int j = 0; j < i; ++j) {
+                indexArray[j] = j;
+            }
+            StdRandom.shuffle(indexArray);
         }
 
         public boolean hasNext() {
@@ -76,9 +82,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
         public Item next() {        
             if (!hasNext()) throw new NoSuchElementException();
-            if (i > 1) StdRandom.shuffle(a, 0, i-1);
-            i--;
-            return a[i]; 
+            return a[indexArray[--i]]; 
         }
     }
     
