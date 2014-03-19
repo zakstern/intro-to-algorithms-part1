@@ -13,4 +13,33 @@
 
 public class Brute {
     
+    public static boolean inBounds(int i) {
+        if (i > 0 && i < 32768) return true;
+        return false; 
+    }
+    
+    public static void main(String[] args) {
+        In in = new In(args[0]);      // input file
+        int N = in.readInt();         // number of points
+        
+// rescale coordinates and turn on animation mode
+        StdDraw.setXscale(0, 32768);
+        StdDraw.setYscale(0, 32768);
+
+        
+        for (int i = 0; i < N; i++) {
+            int x = in.readInt();
+            int y = in.readInt();
+            if (inBounds(x) && inBounds(y)) {
+                
+                Point p = new Point(x,y);
+                //StdOut.println(p.toString());
+                p.draw();
+            }
+        }
+        
+        // display to screen all at once
+        //StdDraw.show(0);
+           
+    }
 }

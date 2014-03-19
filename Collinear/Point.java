@@ -43,9 +43,13 @@ public class Point implements Comparable<Point> {
     // slope between this point and that point
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
-        if (this == that) return Double.NEGATIVE_INFINITY; 
-        else if (this.y == that.y) return 0.0; 
-        else if (this.x == that.x) return Double.POSITIVE_INFINITY; 
+        if (this.y == that.y) {
+            if (this.x == that.x) {
+                return Double.NEGATIVE_INFINITY;
+            }
+            return 0.0;
+        }
+        if (this.x == that.x) return Double.POSITIVE_INFINITY; 
         return ((double) that.y - this.y) / (that.x - this.x);
     }
 
@@ -72,13 +76,29 @@ public class Point implements Comparable<Point> {
     private class SlopeOrder implements Comparator<Point> {
         public int compare(Point p1, Point p2) {
             if (slopeTo(p1) < slopeTo(p2)) return -1;
-            else if (slopeTo(p1) > p2.slopeTo(p1)) return 1;
+            else if (slopeTo(p1) > slopeTo(p2)) return 1;
             else return 0;
         }
     }
 
     // unit test
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        Point p, q, r;
+        p = new Point(87, 479);
+        q = new Point(87, 479);
+        assert p.slopeTo(q) == Double.NEGATIVE_INFINITY;
+        p = new Point(25681, 22210);
+        q = new Point(25681, 22210);
+        assert p.slopeTo(q) == Double.NEGATIVE_INFINITY;
+        p = new Point(3, 4);
+        q = new Point(3, 4);
+        assert p.slopeTo(q) == Double.NEGATIVE_INFINITY;
+        p = new Point(8, 5);
+        q = new Point(9, 4);
+        r = new Point(8, 5);    
+        assert p.slopeTo(q)    == -1.0;
+        assert p.slopeTo(r)    == Double.NEGATIVE_INFINITY; 
+        assert p.SLOPE_ORDER.compare(q, r) == 1;
+           
     }
 }
