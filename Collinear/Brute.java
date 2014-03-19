@@ -25,7 +25,8 @@ public class Brute {
 // rescale coordinates and turn on animation mode
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-
+        StdDraw.setPenRadius(.01);
+        StdDraw.show();
         
         for (int i = 0; i < N; i++) {
             int x = in.readInt();
@@ -35,6 +36,7 @@ public class Brute {
                 Point p = new Point(x,y);
                 //StdOut.println(p.toString());
                 p.draw();
+                StdDraw.show();
             }
         }
         
